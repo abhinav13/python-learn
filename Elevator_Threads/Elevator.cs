@@ -14,7 +14,7 @@ namespace Elevator_Threads
         
         private List<Button> _buttons = null;
 
-        public ElevatorEnums.ElevatorDirection Direction { get; private set; }
+        public ElevatorEnums.ElevatorDirection Direction { get; set; }
         public int CurrentFloor { get; private set; }
 
         //Defensive coding, so you cant make an elvator without floors

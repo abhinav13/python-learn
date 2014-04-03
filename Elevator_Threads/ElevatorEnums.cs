@@ -32,7 +32,24 @@ namespace Elevator_Threads
         public enum ElevatorDirection
         {
             Up,
-            Down
+            Down,
+            Neutral
+        }
+
+        public enum DoorState
+        {
+            Open,
+            Close
+        }
+
+        public static int MinFloor()
+        {
+            return 0;
+        }
+
+        public static int MaxFloor()
+        {
+            return 5;
         }
     }
 }

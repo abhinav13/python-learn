@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Security.Principal;
 using System.Text;
@@ -12,11 +13,13 @@ namespace Elevator_Threads
     {
         private Guid _id;
         
-        private List<Button> _buttons = null;
+        public List<Button> Buttons = null;
 
         public ElevatorEnums.ElevatorDirection Direction { get; set; }
         public int CurrentFloor { get;  set; }
 
+        public ElevatorEnums.ElevatorState CurrentElevatorState { get; set; }
+        public ElevatorEnums.DoorState DoorState { get; set; }
         //Defensive coding, so you cant make an elvator without floors
         private Elevator()
         {
@@ -29,7 +32,7 @@ namespace Elevator_Threads
             while (i++ < numfloors)
             {
                 Button tempButton = new Button(ElevatorEnums.ButtonType.Floor, i);
-                _buttons.Add(tempButton);
+                Buttons.Add(tempButton);
             }
         }
 
@@ -43,12 +46,20 @@ namespace Elevator_Threads
 
         public void PushButton(int floor)
         {
-            _buttons[floor].ButtonState = ElevatorEnums.ButtonState.On;
-            _buttons[floor].IsPressed = true;
+            Buttons[floor].ButtonState = ElevatorEnums.ButtonState.On;
+            Buttons[floor].IsPressed = true;
 
         }
 
-       
+        public int GetNextFloor()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateStatus()
+        {
+            throw new NotImplementedException();
+        }
 
     }
 }

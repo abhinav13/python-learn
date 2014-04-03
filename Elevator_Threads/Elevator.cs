@@ -13,7 +13,7 @@ namespace Elevator_Threads
     {
         private Guid _id;
         
-        public List<Button> Buttons = null;
+        public List<Button> ButtonList = null;
 
         public ElevatorEnums.ElevatorDirection Direction { get; set; }
         public int CurrentFloor { get;  set; }
@@ -32,7 +32,8 @@ namespace Elevator_Threads
             while (i++ < numfloors)
             {
                 Button tempButton = new Button(ElevatorEnums.ButtonType.Floor, i);
-                Buttons.Add(tempButton);
+                ButtonList = new List<Button>();
+                ButtonList.Add(tempButton);
             }
         }
 
@@ -46,8 +47,8 @@ namespace Elevator_Threads
 
         public void PushButton(int floor)
         {
-            Buttons[floor].ButtonState = ElevatorEnums.ButtonState.On;
-            Buttons[floor].IsPressed = true;
+            ButtonList[floor].ButtonState = ElevatorEnums.ButtonState.On;
+            ButtonList[floor].IsPressed = true;
 
         }
 

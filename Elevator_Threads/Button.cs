@@ -10,7 +10,7 @@ namespace Elevator_Threads
     {
         public ElevatorEnums.ButtonType Type { get; private set; }
         public int Floor { get; private set;  }
-        public ElevatorEnums.ButtonState ButtonState { get; set; }
+        
         public bool IsPressed { get; set; }
         public Button(ElevatorEnums.ButtonType t, int floorNum)
         {

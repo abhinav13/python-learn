@@ -16,9 +16,11 @@ namespace Elevator_Threads
             ElevatorControl newControl = new ElevatorControl(newElevator);
             Thread runThread = new Thread(new ThreadStart(newControl.Run));
             runThread.Start();
-            newElevator.PushButton(1);
+            
             newElevator.PushButton(2);
             newElevator.PushButton(3);
+            newElevator.PushButton(1);
+            Console.ReadKey();
 
         }
     }

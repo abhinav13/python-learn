@@ -29,12 +29,15 @@ namespace Elevator_Threads
         {
             int i = 0;
             _id = Guid.NewGuid();
-            while (i++ < numfloors)
+            ButtonList = new List<Button>();
+            while (i < numfloors)
             {
                 Button tempButton = new Button(ElevatorEnums.ButtonType.Floor, i);
-                ButtonList = new List<Button>();
-                ButtonList.Add(tempButton);
+                ButtonList.Insert(i++,tempButton);
             }
+            CurrentElevatorState = ElevatorEnums.ElevatorState.Stopped;
+            DoorState = ElevatorEnums.DoorState.Close;
+            Direction = ElevatorEnums.ElevatorDirection.Neutral;
         }
 
         public Guid ID
@@ -47,8 +50,7 @@ namespace Elevator_Threads
 
         public void PushButton(int floor)
         {
-            ButtonList[floor].ButtonState = ElevatorEnums.ButtonState.On;
-            ButtonList[floor].IsPressed = true;
+           ButtonList[floor].IsPressed = true;
 
         }
 

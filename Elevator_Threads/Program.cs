@@ -19,6 +19,7 @@ namespace Elevator_Threads
             
             newElevator.PushButton(2);
             newElevator.PushButton(3);
+            Thread.Sleep(5000);
             newElevator.PushButton(1);
             Console.ReadKey();
 

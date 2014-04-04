@@ -36,8 +36,8 @@ namespace Elevator_Threads
                 {
                     //If there are not more buttons pressed, just stay
                     var _templist = thisElevator.ButtonList.FindAll(ii => ii.IsPressed == true);
-                    if (_listOfStopHashtable.Count !=0 || _templist.Count != 0 )
-                    {
+                    //if (_listOfStopHashtable.Count !=0 || _templist.Count != 0 )
+                    //{
                         PrintElevatorState(thisElevator);
                         //if we are stopped
                         //Check if we were moving down
@@ -99,20 +99,24 @@ namespace Elevator_Threads
                                     thisElevator.CurrentElevatorState = ElevatorEnums.ElevatorState.Stopped;
                                     thisElevator.DoorState = ElevatorEnums.DoorState.Open;
                                     thisElevator.ButtonList[thisElevator.CurrentFloor].IsPressed = false;
+                                    thisElevator.Direction = ElevatorEnums.ElevatorDirection.Neutral;
                                     _listOfStopHashtable.Remove(thisElevator.CurrentFloor);
                                 }
                                 else
                                 {
-                                    thisElevator.CurrentFloor++;
+                                    thisElevator.CurrentFloor = thisElevator.Direction ==
+                                                                ElevatorEnums.ElevatorDirection.Down
+                                        ? --thisElevator.CurrentFloor
+                                        : ++thisElevator.CurrentFloor;
                                 }
                             }
                         }
                   
-                    }
-                    else
-                    {
-                        thisElevator.Direction = ElevatorEnums.ElevatorDirection.Neutral;
-                    }
+                    //}
+                    //else
+                   // {
+                   //     
+                    //}
                     Thread.Sleep(1000);
                 }
                 catch (Exception ex)

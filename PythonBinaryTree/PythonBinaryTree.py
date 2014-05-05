@@ -4,9 +4,10 @@ class Node():
   
     def __init__(self, cargo=None,left=None, right=None):
         self.cargo = cargo
-        self.left = left;
-        self.right = right;
-        self.visited = None;
+        self.left = left
+        self.right = right
+        self.visited = None
+	self.sumbelow = 0
                    
     def __str__(self): 
         return str(self.cargo)            
@@ -42,9 +43,46 @@ print lines
 #Init head of tree = None
 head=None
 
-
-
-
+total=0
+prev_total =0
+#Calculate largest sum seen so far
+def calsum(node):
+	#recurse through the tree
+	global total
+	#current_num = node.cargo
+	global prev_total
+	if(node == None):
+		#we have reached the end. So now calculate the sum and store it in a list
+		if prev_total == 0:
+			prev_total = total
+		elif prev_total < total:
+			prev_total = total
+		return
+	#Add the node's value to total and recurse left side
+	#now only visit the left tree if we have not calculated the sum below this node
+	if node.sumbelow != 0:
+		#we dont need to traverse down the tree
+		total = total+node.sumbelow 
+	else:
+		calsum(node.left)
+		total = total+int(node.cargo)
+	#subtract the left child's value from the total and call right child
+	if(node.left != None):
+		total = total - int(node.left.cargo)
+		print "Subtracting left child", node.left.cargo
+		#now calculate the sum of nodes below this node.
+		if int(node.cargo) + int(node.left.cargo) > int(node.sumbelow):
+			node.sumbelow = int(node.cargo) + int(node.left.cargo)
+	calsum(node.right)
+	
+	if(node.right != None):
+		total = total - int(node.right.cargo)
+		print "Subtracting right child",node.right.cargo
+		if int(node.cargo) + int(node.right.cargo) > int(node.sumbelow):
+			node.sumbelow = int(node.cargo) + int(node.right.cargo)
+	#now mark the node as visited
+	return	
+		
 def createTree(lines):
         global head
         line_number=0
@@ -94,5 +132,6 @@ def createTree(lines):
 #Create the Binary Tree from the File
 createTree(lines)
 printTree(head)
-
-
+calsum(head)
+print "total", total
+print "prev_total", prev_total

@@ -1,0 +1,7 @@
+Given a list of positive numbers from 0-N, some numbers from the list are missing. 
+
+input - a number
+if the number occurs in the list, return the number
+if the number does not occur in the list, give the number closest to the missing number.
+if there is a tie, for e.g. the list contains 89,91 and input number is 90, you should always return the smaller of the two
+closest number

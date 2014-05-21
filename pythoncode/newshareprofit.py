@@ -1,4 +1,4 @@
-list=[15,16,14,17,13,11,19]
+list=[10,15,16,14,17,13,11,19]
 
 pos_buy_price = list[0]
 neg_buy_price = list[0]

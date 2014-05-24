@@ -37,6 +37,28 @@ class Circuit:
 	def __str__(self):
 		return "Name %s, HValue %s, EValue %s, PValue %s Value %s" % \
 			(self.Name,self.HValue,self.EValue,self.PValue,self.Value) 
+class Juggler:
+	
+	def __init__(self,line):
+		if(len(line) == 0 or str(line[0]).upper() != 'J'):
+			print "Incorrect input to Juggler class"
+			exit()
+
+		newline = line[1:].lstrip()
+		(CName,H,E,P,Pref) = newline.split()
+		self.Name = CName
+		self.HValue = H.split(':')[1]
+		self.EValue = E.split(':')[1]
+		self.PValue = P.split(':')[1]
+		self.PrefList = []
+		self.PrefList = Pref.split(',') 
+		self.Value = int(self.HValue) + int(self.PValue) + int(self.EValue) + int(self.HValue)	
+
+
+	def __str__(self):
+		return "Name %s, HValue %s, EValue %s, PValue %s Value %s PrefList %s" % \
+			(self.Name,self.HValue,self.EValue,self.PValue,self.Value, self.PrefList) 
+
 
 if (len(argv) != 2) :
 	print "Usage: yoddle_puzzle.py <inputfile.txt>"
@@ -44,7 +66,9 @@ if (len(argv) != 2) :
 
 with open(argv[1], 'r') as f:
 	for line in f:
-		if (line.strip()):
+		if(len(line.strip()) != 0 and str(line[0]).upper() == 'C'):
 			print Circuit(line)
+		elif (len(line.strip()) != 0 and str(line[0]).upper() == 'J'):
+			print Juggler(line)
 		else:
-			print "Found empty line"
+			print "Found Empty Line"

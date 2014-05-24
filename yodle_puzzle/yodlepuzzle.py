@@ -31,15 +31,27 @@ class Circuit:
 		self.HValue = H.split(':')[1]
 		self.EValue = E.split(':')[1]
 		self.PValue = P.split(':')[1]
-		self.Value = int(self.HValue) + int(self.PValue) + int(self.EValue) + int(self.HValue)	
-
+		self.AssignedJugglers = []
 
 	def __str__(self):
-		return "Name %s, HValue %s, EValue %s, PValue %s Value %s" % \
-			(self.Name,self.HValue,self.EValue,self.PValue,self.Value) 
+		return " %s" % \
+			(self.Name) 
+	
+	def __repr__(self):
+		return str(self)
+	
+	def dotProduct(self,Juggler):
+		return 	(int(self.HValue) * int(Juggler.HValue))+\
+			(int(self.EValue) * int(Juggler.EValue))+\
+			(int(self.PValue) * int(Juggler.PValue))
+
+	def debugPrint(self):
+		print 'HValue:r',self.HValue,'EValue:',self.EValue,'PValue:',self.PValue\
+			,'JugglerList:',self.AssignedJugglers
+
 class Juggler:
 	
-	def __init__(self,line):
+	def __init__(self,line,AllCircuits):
 		if(len(line) == 0 or str(line[0]).upper() != 'J'):
 			print "Incorrect input to Juggler class"
 			exit()
@@ -50,16 +62,29 @@ class Juggler:
 		self.HValue = H.split(':')[1]
 		self.EValue = E.split(':')[1]
 		self.PValue = P.split(':')[1]
-		self.PrefList = []
-		self.PrefList = Pref.split(',') 
-		self.Value = int(self.HValue) + int(self.PValue) + int(self.EValue) + int(self.HValue)	
+		self.PreferedCircuits = []
+		self.PreferedCircuits = [ AllCircuits[x] for x in Pref.split(',') ] 
 
 
 	def __str__(self):
-		return "Name %s, HValue %s, EValue %s, PValue %s Value %s PrefList %s" % \
-			(self.Name,self.HValue,self.EValue,self.PValue,self.Value, self.PrefList) 
+		return "Juggler Name %s, HValue %s, EValue %s, PValue %s PreferedList %s" % \
+			(self.Name,self.HValue,self.EValue,self.PValue, str(self.PreferedCircuits)) 
+
+	def __repr__(self):
+		return str(self)
+AllJugglers = {}
+AllCircuits = {}
+#Debug Prints
+def PrintCircuits():
+	for k in AllCircuits.keys():
+		AllCircuits[k].debugPrint()
+
+def PrintJugglers():
+	for k in AllJugglers.keys():
+		print AllJugglers[k]
 
 
+#Usage
 if (len(argv) != 2) :
 	print "Usage: yoddle_puzzle.py <inputfile.txt>"
 	exit()
@@ -67,8 +92,25 @@ if (len(argv) != 2) :
 with open(argv[1], 'r') as f:
 	for line in f:
 		if(len(line.strip()) != 0 and str(line[0]).upper() == 'C'):
-			print Circuit(line)
+			c = Circuit(line)
+			#Now add this to the dictionary
+			AllCircuits[str(c.Name)] = c
 		elif (len(line.strip()) != 0 and str(line[0]).upper() == 'J'):
-			print Juggler(line)
-		else:
-			print "Found Empty Line"
+			c = Juggler(line,AllCircuits)
+			AllJugglers[str(c.Name)] = c
+			
+
+JugglersPerCircuit = len(AllJugglers.keys())/len(AllCircuits.keys())
+print "Juggler per circuit", JugglersPerCircuit
+
+
+for k in AllJugglers.keys():
+	j = AllJugglers[k]
+	print j.Name,
+	for pref_circuit in j.PreferedCircuits:
+		print pref_circuit,':',pref_circuit.dotProduct(j),	
+	print
+
+
+PrintCircuits()
+PrintJugglers()

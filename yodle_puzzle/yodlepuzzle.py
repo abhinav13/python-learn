@@ -48,6 +48,20 @@ class Circuit:
 	def debugPrint(self):
 		print 'HValue:r',self.HValue,'EValue:',self.EValue,'PValue:',self.PValue\
 			,'JugglerList:',self.AssignedJugglers
+	
+def assignJuggler(AllCircuits,thisJuggler,limit):
+#	if(len(self.AssignedJugglers) < limit):
+# if the juggler's prefered circuit has less than limit jugglers assigned, then insert the juggler to this circuit
+# if the juggler's prefered circuit has no space ,then see if the dot product of the juggler with this circuit 			
+# is greater than any juggler in this circuit, the juggler with the score lower than current juggler is removed
+# Now the circuit needs to be rebalanced. You take the removed juggler and look at its next preferred circuit
+# if the next preferred circuit is full, you do the same trick of removal/addition. The juggler with the lowest score
+# looses. And then he is assigned to it
+#
+#
+#
+#
+
 
 class Juggler:
 	
@@ -74,7 +88,9 @@ class Juggler:
 		return str(self)
 AllJugglers = {}
 AllCircuits = {}
+
 #Debug Prints
+
 def PrintCircuits():
 	for k in AllCircuits.keys():
 		AllCircuits[k].debugPrint()

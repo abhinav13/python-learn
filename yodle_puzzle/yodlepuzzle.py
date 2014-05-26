@@ -101,6 +101,7 @@ def assignJuggler(AllCircuits,thisJuggler,limit):
 
 	inserted=False
 	#Check to see what the jugglers preference are
+	print "now Processing juggler ", thisJuggler.Name
 	for preferedcircuit in thisJuggler.PreferedCircuits:
 		if(len(preferedcircuit.AssignedJugglers) < limit):
 			print "Adding Juggler",thisJuggler.Name," to free circuit",preferedcircuit.Name,preferedcircuit.AssignedJugglers	
@@ -120,9 +121,11 @@ def assignJuggler(AllCircuits,thisJuggler,limit):
 				#Now Recursively call 
 				#to Add the removed Juggler back into the circuits
 				assignJuggler(AllCircuits,removethisjuggler,limit)
+			else:
+				print "Did not find a replacement juggler for ",thisJuggler.Name," continue"
 		if inserted == True:
 			break
-		return None
+	return None
 
 
 

@@ -38,7 +38,7 @@ class Circuit:
 			(self.Name) 
 	
 	def __repr__(self):
-		return str(self)
+		return str(self) 
 	
 	def dotProduct(self,Juggler):
 		return 	(int(self.HValue) * int(Juggler.HValue))+\
@@ -48,20 +48,6 @@ class Circuit:
 	def debugPrint(self):
 		print 'HValue:r',self.HValue,'EValue:',self.EValue,'PValue:',self.PValue\
 			,'JugglerList:',self.AssignedJugglers
-	
-def assignJuggler(AllCircuits,thisJuggler,limit):
-#	if(len(self.AssignedJugglers) < limit):
-# if the juggler's prefered circuit has less than limit jugglers assigned, then insert the juggler to this circuit
-# if the juggler's prefered circuit has no space ,then see if the dot product of the juggler with this circuit 			
-# is greater than any juggler in this circuit, the juggler with the score lower than current juggler is removed
-# Now the circuit needs to be rebalanced. You take the removed juggler and look at its next preferred circuit
-# if the next preferred circuit is full, you do the same trick of removal/addition. The juggler with the lowest score
-# looses. And then he is assigned to it
-#
-#
-#
-#
-
 
 class Juggler:
 	
@@ -81,11 +67,65 @@ class Juggler:
 
 
 	def __str__(self):
-		return "Juggler Name %s, HValue %s, EValue %s, PValue %s PreferedList %s" % \
-			(self.Name,self.HValue,self.EValue,self.PValue, str(self.PreferedCircuits)) 
+		return "JName %s, %s" % \
+			(self.Name, [ (x.Name,':',x.dotProduct(self)) for x in self.PreferedCircuits])
 
 	def __repr__(self):
 		return str(self)
+
+
+def findJugglertoReplace(Circuit, thisJuggler,JugglerList):
+
+	b = [ (x, (Circuit.dotProduct(thisJuggler) - Circuit.dotProduct(x)))\
+		 for x in JugglerList if (Circuit.dotProduct(thisJuggler) - Circuit.dotProduct(x)) >0 ]
+	sorted_by_second = sorted(b, key=lambda tup: tup[1],reverse=True)
+	print "sorted_by_second", sorted_by_second
+	if(len(sorted_by_second) > 0 ):
+		(juggler_to_return,score) = sorted_by_second[0]
+	else:
+		juggler_to_return = None
+	return juggler_to_return	
+		
+	
+def assignJuggler(AllCircuits,thisJuggler,limit):
+#	if(len(self.AssignedJugglers) < limit):
+# if the juggler's prefered circuit has less than limit jugglers assigned, then insert the juggler to this circuit
+# if the juggler's prefered circuit has no space ,then see if the dot product of the juggler with this circuit 			
+# is greater than any juggler in this circuit, the juggler with the score lower than current juggler is removed
+# Now the circuit needs to be rebalanced. You take the removed juggler and look at its next preferred circuit
+# if the next preferred circuit is full, you do the same trick of removal/addition. The juggler with the lowest score
+# looses. And then he is assigned to it
+
+
+
+
+	inserted=False
+	#Check to see what the jugglers preference are
+	for preferedcircuit in thisJuggler.PreferedCircuits:
+		if(len(preferedcircuit.AssignedJugglers) < limit):
+			print "Adding Juggler",thisJuggler.Name," to free circuit",preferedcircuit.Name,preferedcircuit.AssignedJugglers	
+			preferedcircuit.AssignedJugglers.append(thisJuggler)
+			inserted = True
+			return None
+		else: #
+			#compare this jugglers match rating with all the ones in the preferred circuit
+			removethisjuggler = findJugglertoReplace(preferedcircuit,thisJuggler,preferedcircuit.AssignedJugglers)
+			if(removethisjuggler != None):
+				print "Removing Juggler", removethisjuggler.Name,"from circuit",preferedcircuit.Name	
+				preferedcircuit.AssignedJugglers.remove(removethisjuggler)
+				print "Adding Juggler ", thisJuggler, "to circuit",\
+				preferedcircuit.Name ,preferedcircuit.AssignedJugglers
+				preferedcircuit.AssignedJugglers.append(thisJuggler)
+				inserted = True	
+				#Now Recursively call 
+				#to Add the removed Juggler back into the circuits
+				assignJuggler(AllCircuits,removethisjuggler,limit)
+		if inserted == True:
+			break
+		return None
+
+
+
 AllJugglers = {}
 AllCircuits = {}
 
@@ -93,7 +133,7 @@ AllCircuits = {}
 
 def PrintCircuits():
 	for k in AllCircuits.keys():
-		AllCircuits[k].debugPrint()
+		k.debugPrint()
 
 def PrintJugglers():
 	for k in AllJugglers.keys():
@@ -119,6 +159,8 @@ with open(argv[1], 'r') as f:
 JugglersPerCircuit = len(AllJugglers.keys())/len(AllCircuits.keys())
 print "Juggler per circuit", JugglersPerCircuit
 
+for k in AllJugglers.keys():
+	assignJuggler(AllCircuits,AllJugglers[k],JugglersPerCircuit)
 
 for k in AllJugglers.keys():
 	j = AllJugglers[k]
@@ -128,5 +170,5 @@ for k in AllJugglers.keys():
 	print
 
 
-PrintCircuits()
-PrintJugglers()
+#PrintCircuits()
+#PrintJugglers()

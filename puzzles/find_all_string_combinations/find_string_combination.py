@@ -10,23 +10,22 @@ def swap(a, i ,j):
 def findAll(a,start):
 	
 	#print "start at the begining ", start
-	if(start > len(a)-1):
+	if(start == len(a)-1):
+		print "Returning aftger printing " ,a
 		return
-	else:
-		print a
 
-	while(start < len(a)-1):
-		j = start+1
-		while j <= len(a)-1:
-			print "Before swap a = " , a,
-			print "j = ",j,"start = ",start
-			swap(a,start,j)
-			findAll(a,j)
-			print "After recursive call a= ", a
-			swap(a,j,start)
-			print "After reverse swap a= ", a
-			j = j+1
-		start = start+1
+	j =start 
+	while j <= len(a)-1:
+		#print "Before swap a = " , a,
+		#print "j = ",j,"start = ",start
+		swap(a,start,j)
+		#print "Calling FinDAll "
+		findAll(a,start+1)
+		#print "After recursive call a= ", a
+		swap(a,j,start)
+		#print "After reverse swap a= ", a
+		j = j+1
+	
 
 a = ['A','B','C']
 

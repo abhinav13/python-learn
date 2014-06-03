@@ -1,0 +1,11 @@
+Given a string, find all posssible combinations of the string.
+for e.g
+give ABC
+the output of the program should be
+ABC
+BAC
+BCA
+ACB
+CAB
+CBA
+

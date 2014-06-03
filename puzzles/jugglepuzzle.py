@@ -79,7 +79,6 @@ def findJugglertoReplace(Circuit, thisJuggler,JugglerList):
 	b = [ (x, (Circuit.dotProduct(thisJuggler) - Circuit.dotProduct(x)))\
 		 for x in JugglerList if (Circuit.dotProduct(thisJuggler) - Circuit.dotProduct(x)) >0 ]
 	sorted_by_second = sorted(b, key=lambda tup: tup[1],reverse=True)
-	print "sorted_by_second", sorted_by_second
 	if(len(sorted_by_second) > 0 ):
 		(juggler_to_return,score) = sorted_by_second[0]
 	else:
@@ -101,10 +100,10 @@ def assignJuggler(AllCircuits,thisJuggler,limit):
 
 	inserted=False
 	#Check to see what the jugglers preference are
-	print "now Processing juggler ", thisJuggler.Name
+	#print "now Processing juggler ", thisJuggler
 	for preferedcircuit in thisJuggler.PreferedCircuits:
 		if(len(preferedcircuit.AssignedJugglers) < limit):
-			print "Adding Juggler",thisJuggler.Name," to free circuit",preferedcircuit.Name,preferedcircuit.AssignedJugglers	
+			#print "Adding Juggler",thisJuggler.Name," to free circuit",preferedcircuit.Name,preferedcircuit.AssignedJugglers	
 			preferedcircuit.AssignedJugglers.append(thisJuggler)
 			inserted = True
 			return None
@@ -112,17 +111,17 @@ def assignJuggler(AllCircuits,thisJuggler,limit):
 			#compare this jugglers match rating with all the ones in the preferred circuit
 			removethisjuggler = findJugglertoReplace(preferedcircuit,thisJuggler,preferedcircuit.AssignedJugglers)
 			if(removethisjuggler != None):
-				print "Removing Juggler", removethisjuggler.Name,"from circuit",preferedcircuit.Name	
+				#print "Removing Juggler", removethisjuggler.Name,"from circuit",preferedcircuit.Name	
 				preferedcircuit.AssignedJugglers.remove(removethisjuggler)
-				print "Adding Juggler ", thisJuggler, "to circuit",\
+				#print "Adding Juggler ", thisJuggler, "to circuit",\
 				preferedcircuit.Name ,preferedcircuit.AssignedJugglers
 				preferedcircuit.AssignedJugglers.append(thisJuggler)
 				inserted = True	
 				#Now Recursively call 
 				#to Add the removed Juggler back into the circuits
 				assignJuggler(AllCircuits,removethisjuggler,limit)
-			else:
-				print "Did not find a replacement juggler for ",thisJuggler.Name," continue"
+			#else:
+				#print "Did not find a replacement juggler for ",thisJuggler.Name," continue"
 		if inserted == True:
 			break
 	return None
@@ -135,8 +134,15 @@ AllCircuits = {}
 #Debug Prints
 
 def PrintCircuits():
-	for k in AllCircuits.keys():
-		k.debugPrint()
+	for c in AllCircuits.keys():
+		k = AllCircuits[c]
+		print "\n",k,
+		for j in k.AssignedJugglers:
+			print j.Name,"[",
+			for pref_circuit in j.PreferedCircuits:
+				print pref_circuit,':',pref_circuit.dotProduct(j),
+			print "]",	
+	print
 
 def PrintJugglers():
 	for k in AllJugglers.keys():
@@ -145,7 +151,7 @@ def PrintJugglers():
 
 #Usage
 if (len(argv) != 2) :
-	print "Usage: yoddle_puzzle.py <inputfile.txt>"
+	print "Usage: juggle_puzzle.py <inputfile.txt>"
 	exit()
 
 with open(argv[1], 'r') as f:
@@ -165,13 +171,8 @@ print "Juggler per circuit", JugglersPerCircuit
 for k in AllJugglers.keys():
 	assignJuggler(AllCircuits,AllJugglers[k],JugglersPerCircuit)
 
-for k in AllJugglers.keys():
-	j = AllJugglers[k]
-	print j.Name,
-	for pref_circuit in j.PreferedCircuits:
-		print pref_circuit,':',pref_circuit.dotProduct(j),	
-	print
 
+print '\n\n'
 
-#PrintCircuits()
+PrintCircuits()
 #PrintJugglers()

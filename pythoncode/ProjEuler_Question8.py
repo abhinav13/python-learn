@@ -50,10 +50,12 @@ while(frame_end < len(numberlist)):
 	#any number in the current frame of reference
  	if greaterthan(numberlist,start,end,numberlist[frame_end]):
 		#we found a new max prod
-		max_prod = calprod(numberlist,frame_start,frame_end)
-		start = frame_start
-		print "max_prod",max_prod
-		end = frame_end
+		temp = calprod(numberlist,frame_start,frame_end)
+		if(temp > max_prod):
+			max_prod = temp
+			start = frame_start
+			print "max_prod",max_prod
+			end = frame_end
 	else:
 		print "no go"
 	print 'current frame end',frame_end

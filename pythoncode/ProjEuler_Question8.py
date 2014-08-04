@@ -41,7 +41,7 @@ end = 12
 max_prod = calprod(numberlist, start,end)
 print "max_prod",max_prod
 frame_start = start
-frame_end = end
+frame_end = start
 print len(numberlist)
 while(frame_end < len(numberlist)):
 	

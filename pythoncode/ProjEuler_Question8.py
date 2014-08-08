@@ -2,17 +2,17 @@ import os
 import sys
 
 
-def calprod(l, start, end):
+def calprod(numarray, start, end):
 	total =1
 	while(start != end):
-		total = total*int(l[start])
+		total = total*int(numarray[start])
 		start = start +1
 	return total
 
-def greaterthan(l,start,end, num):
+def greaterthan(numarray,start,end, num):
 	print "now scanning",start,"to end", end, "for number", num	
 	while(start <= end):
-		if int(l[start]) < int(num):
+		if int(numarray[start]) < int(num):
 			return True
 		else:
 			start = int(start)+1
@@ -24,13 +24,13 @@ def greaterthan(l,start,end, num):
 # add them to the list of the big number
 
 with open("question8.txt",'r') as f:
-	d = f.readlines()
+	alllines = f.readlines()
 	#print d
 	#print type(d)
 
 numberlist = []
 
-for line in d:
+for line in alllines:
 	line.rstrip()
 	for digits in line:
 		if digits.isdigit():
@@ -42,7 +42,7 @@ max_prod = calprod(numberlist, start,end)
 print "max_prod",max_prod
 frame_start = start
 frame_end = start
-print len(numberlist)
+print "len of input array ",len(numberlist)
 while(frame_end < len(numberlist)):
 	
 

@@ -4,6 +4,10 @@ import logging
 import argparse
 from enum import Enum
 
+
+functionlookup = {'DEBUG': lambda x: logging.debug(x), 'WARN': lambda x : logging.warn(x), 'INFO': lambda x : logging.warn(x) }
+
+
 class LogLevel(Enum):
 	debug =1
 	error=2
@@ -22,16 +26,21 @@ def get_logfilename():
 
 
 class MyLog:
-	"""This prints to a log file """
+	""" Class Init """
 	def __init__(self,filename=None, loglevel=None):
 		if filename == None:
 			filename = get_logfileName()
 		if loglevel == None:
 			loglevel = 'DEBUG' 
+		elif not isinstance(getattr(logging,loglevel.upper(),None), int):
+			raise ValueError('Invalid Log Level specified :%s' %loglevel)
 
 		self["filename"] = filename
 		self["loglevel"] = loglevel
+		logging.basicConfig(filename = self.filename, filemode='w', format='%(asctime)s %(message)s', 
+				    datefmt='%m/%d/%Y %I:%M:%S %p', level=loglevel.upper())
 
+	"""This function writes to a log file """
 	def write(loglevel,message):
 		if self["loglevel"] == loglevel:
 

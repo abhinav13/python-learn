@@ -6,16 +6,21 @@ import sys
 # Arg2 is the divisor 
 
 def divby7(number,divisor):
-	i=0
+	i=1
 	divisor=7	
 	count = divisor
 	if  divisor > number:
 		return 0 
 	while count < number:
-		count = count + divisor
-		i = i +1
+		count = count << 1 
+		i = i << 1
 	if count == number:
-		i=i+1
-	return i
+		return i
+    	elif count > number:
+        #while count > number subtracting count and keep track
+        	while count > number :
+            		count = count -divisor
+            		i = i-1
+    	return i   
 
 print divby7(int(sys.argv[1]),int(sys.argv[2]))

@@ -1,5 +1,4 @@
 #!/usr/bin/python
-import os
 import random
 
 d={}
@@ -79,6 +78,6 @@ print findinlist(0)
 
 generateNum(UpperLimit,LowerLimit)
 
-for i in range(0,50):
+for i in xrange(0,50):
 	num = random.randrange(LowerLimit,UpperLimit)
 	print findinlist(num)

@@ -1,4 +1,4 @@
-set textwidth=120  " lines longer than 120 columns will be broken
+set textwidth=130  " lines longer than 120 columns will be broken
 set shiftwidth=4  " operation >> indents 4 columns; << unindents 4 columns
 set tabstop=4     " a hard TAB displays as 4 columns
 set expandtab     " insert spaces when hitting TABs
@@ -22,8 +22,8 @@ filetype plugin indent on
 augroup vimrc_autocmds
         autocmd!
         " highlight characters past column 120
-        autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
-        autocmd FileType python match Excess /\%120v.*/
+        autocmd FileType python highlight Excess ctermbg=green guibg=Black
+        autocmd FileType python match Excess /\%130v.*/
         autocmd FileType python set nowrap
 augroup END
 

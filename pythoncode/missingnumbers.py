@@ -56,7 +56,6 @@ def findinlist(num):
 d={'0':0,'100':100}
 print d
 print findinlist(90)
-
 d= {'0':0,'100':100}
 print d
 print findinlist(0)

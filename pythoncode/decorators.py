@@ -21,7 +21,8 @@ def timestamp():
 def add_time_stamp(foo):
     ''' add_time_stamp is a decorator accepting a function #foo '''
     def inner(*args, **kargs):
-    #''' inner is the function containing the decoration which in this case consists of printing the timestamp and the calling the outer function '''
+    ''' inner is the function containing the decoration which in this 
+    case consists of printing the timestamp and the calling the outer function '''
         print(timestamp(),foo(*args, **kargs))
         
     return inner

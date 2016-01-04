@@ -1,4 +1,4 @@
-.global main 
+.global  divby
        
         .text
 main:

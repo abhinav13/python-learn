@@ -5,6 +5,9 @@ import requests
 from bs4 import BeautifulSoup
 import argparse
 
+<<<<<<< HEAD
+print ( "\r Enter Stock Symbol ", end="")
+symbol = input("")
 #while True:
 #print ( "\r Enter Stock Symbol ", end="")
 parser = argparse.ArgumentParser()
@@ -14,7 +17,7 @@ symbol = args.stocksymbol
 
 if (len(symbol)> 0 ):
     fullpage = requests.get("https://www.google.com/finance?q="+symbol)
-    soup = BeautifulSoup(fullpage.text)
+    soup = BeautifulSoup(fullpage.text,"html.parser")
     sub = soup.find(id="price-panel")
     #now print the price
     if(sub != None):

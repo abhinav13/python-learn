@@ -3,9 +3,17 @@
 from __future__ import print_function
 import requests
 from bs4 import BeautifulSoup
+import argparse
 
+<<<<<<< HEAD
 print ( "\r Enter Stock Symbol ", end="")
 symbol = input("")
+#while True:
+#print ( "\r Enter Stock Symbol ", end="")
+parser = argparse.ArgumentParser()
+parser.add_argument("stocksymbol", help="Stock symbol to lookup")
+args = parser.parse_args()
+symbol = args.stocksymbol
 
 if (len(symbol)> 0 ):
     fullpage = requests.get("https://www.google.com/finance?q="+symbol)

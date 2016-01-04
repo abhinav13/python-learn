@@ -1,14 +1,28 @@
 #!/usr/bin/python
 
-import os
-import sys
+#Add my decorator to this 
+def mydecorator(foo):
+    def inner():
+        print("Inside Inner in my decoratar")
+        foo()
+    return inner
 
-def myfunc():
-    print("This is inside myfunc")
+def myfunc(x):
+    print("Inside my func ", x)
 
-def mydecorator():
-    pass
 
+# You can decorate a function without using the @ symbol
+# Wrap the function with an inner function and then call it explicitly
+
+def myouter(foo):
+    
+    def inner(x):
+        print("Inside Inner in myouter func")
+        foo(x)
+    return inner
+
+getfunc = myouter(myfunc)
+getfunc(1)
 
 def timestamp():
     import time
@@ -23,6 +37,7 @@ def add_time_stamp(foo):
     def inner(*args, **kargs):
     ''' inner is the function containing the decoration which in this 
     case consists of printing the timestamp and the calling the outer function '''
+    #''' inner is the function containing the decoration which in this case consists of printing the timestamp and the calling the outer function '''
         print(timestamp(),foo(*args, **kargs))
         
     return inner
@@ -40,8 +55,7 @@ def show_msg(msg):
      show_msg = add_time_stamp(show_msg)
      '''
     print( msg)
+    return 1
 
-
-if __name__=="__main__":
-    show_msg('test')
+     
 

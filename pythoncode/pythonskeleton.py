@@ -2,7 +2,6 @@ import inspect
 import logging
 from enum import Enum
 
-
 functionlookup = {'DEBUG': lambda x: logging.debug(x), 'WARN': lambda x : logging.warn(x), 'INFO': 
                     lambda x : logging.info(x) }
 
@@ -49,7 +48,7 @@ def variableargs(*kwargs):
 
 	for arguments in kwargs:
 		line=str(arguments)
-		print line
+		print(line)
         
 
 def main():

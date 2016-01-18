@@ -68,11 +68,11 @@ def main():
 
     #Read the input file
     rest_of_the_input=""
-    with open(get_sourcefilename() + "_keys.txt", 'r') as f:
+    with open(get_sourcefilename() + ".txt", 'r') as f:
         rest_of_the_input = f.read().rstrip()
         print(rest_of_the_input)
 
-    with open(get_sourcefilename()+".txt", 'r') as f:
+    with open(get_sourcefilename()+"_keys.txt", 'r') as f:
         first_line = f.read().rstrip()
         translation_dict = create_translation_dict(first_line) 
         print(translation_dict)

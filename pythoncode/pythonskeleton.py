@@ -41,8 +41,8 @@ class MyLog:
 
         
 def get_parser():
-    parser = argparse.ArgumentParser(description='Put your description here')
-    parser.add_argument('arg1', metavar='ARG1', type=str, nargs='*',help='Arg1 help text')
+    parser = argparse.ArgumentParser(description='Read the questions for more info')
+    parser.add_argument('-f', metavar='ARG1', type=str, nargs='*',help='input file containing translation key and alien input')
     parser.add_argument('-p', '--pos', help='Detail about first argument (default: 1)', default=1, type=int)
     parser.add_argument('-v', '--version', help='displays the current version of program',
                                     action='store_true')
@@ -55,14 +55,10 @@ def  command_line_runner():
     if args['version']:
         print("No Version Defined")
         return
-    if args['arg1']:
-        print("Arg1 Detected")
     return
 
 def main():
     x = MyLog(loglevel="Debug")
-#	x.write("Info","This is a default info message")
-#	x.write("Debug","This is a debug message")
     command_line_runner()
 
 

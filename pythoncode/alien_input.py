@@ -77,15 +77,15 @@ def main():
         translation_dict = create_translation_dict(first_line) 
         print(translation_dict)
         word = ""
-        for i in range(len(rest_of_the_input)):
-            if(rest_of_the_input[i].isalnum()):
-                word = "".join((word,rest_of_the_input[i]))
+        for i,item in enumerate(rest_of_the_input):
+            if(item.isalnum()):
+                word = "".join((word,item))
                 #now check it in our look up dictionary if a transaltion exists
                 if(word in translation_dict):
                     print(translation_dict[word],end='')
                     word = ''
             else:
-                print(rest_of_the_input[i],end='')
+                print(item,end='')
     print()
 if __name__ =="__main__":
     main()

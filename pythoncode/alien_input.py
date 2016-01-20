@@ -39,9 +39,6 @@ class MyLog:
         else:
             functionlookup[loglevel.upper()](message)
 
-	for arguments in kwargs:
-		line=str(arguments)
-		print(line)
         
 def get_parser():
     parser = argparse.ArgumentParser(description='Read the questions for more info')
@@ -60,11 +57,36 @@ def  command_line_runner():
         return
     return
 
+def create_translation_dict(line):
+    temp = line.split()
+    translation_dict = {}
+    for k in range(0,len(temp),2):
+        translation_dict[temp[k+1]] = temp[k]
+    return translation_dict
+
 def main():
-    x = MyLog(loglevel="Debug")
-    command_line_runner()
 
+    #Read the input file
+    rest_of_the_input=""
+    with open(get_sourcefilename() + ".txt", 'r') as f:
+        rest_of_the_input = f.read().rstrip()
+        print(rest_of_the_input)
 
+    with open(get_sourcefilename()+"_keys.txt", 'r') as f:
+        first_line = f.read().rstrip()
+        translation_dict = create_translation_dict(first_line) 
+        print(translation_dict)
+        word = ""
+        for i in range(len(rest_of_the_input)):
+            if(rest_of_the_input[i].isalnum()):
+                word = "".join((word,rest_of_the_input[i]))
+                #now check it in our look up dictionary if a transaltion exists
+                if(word in translation_dict):
+                    print(translation_dict[word],end='')
+                    word = ''
+            else:
+                print(rest_of_the_input[i],end='')
+    print()
 if __name__ =="__main__":
     main()
 	

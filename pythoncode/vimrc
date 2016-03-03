@@ -7,7 +7,14 @@ set shiftround    " round indent to multiple of 'shiftwidth'
 set autoindent    " align the new line indent with the previous line
 set nocompatible  " dont know what this does
 filetype off      " Dont know what this does either
+" For local replace
+" This is from stack overflow page
+" http://stackoverflow.com/questions/597687/changing-variable-names-in-vim
 
+nnoremap gr gd[{V%::s/<C-R>///gc<left><left><left>
+
+" For global replace
+nnoremap gR gD:%s/<C-R>///gc<left><left><left>
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 

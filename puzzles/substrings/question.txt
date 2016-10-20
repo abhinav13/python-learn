@@ -1,0 +1,5 @@
+Find the longest repeated substring in a given string
+ABCDEDBCD
+The longest repeated substring above is BCD
+ABCABC is ABC
+

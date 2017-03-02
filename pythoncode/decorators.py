@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-#Add my decorator to this 
+#Add my decorator to this
 def mydecorator(foo):
     def inner():
         print("Inside Inner in my decoratar")
@@ -15,7 +15,7 @@ def myfunc(x):
 # Wrap the function with an inner function and then call it explicitly
 
 def myouter(foo):
-    
+
     def inner(x):
         print("Inside Inner in myouter func")
         foo(x)
@@ -35,11 +35,11 @@ def timestamp():
 def add_time_stamp(foo):
     ''' add_time_stamp is a decorator accepting a function #foo '''
     def inner(*args, **kargs):
-    ''' inner is the function containing the decoration which in this 
+    ''' inner is the function containing the decoration which in this
     case consists of printing the timestamp and the calling the outer function '''
     #''' inner is the function containing the decoration which in this case consists of printing the timestamp and the calling the outer function '''
         print(timestamp(),foo(*args, **kargs))
-        
+
     return inner
 
 @add_time_stamp
@@ -47,15 +47,15 @@ def show_msg(msg):
     '''
     show_msg takes a single parameter as its argument and prints
     it to the screen.
-                 
+
      Note that the definition of show_msg is preceeded by @add_time_stamp
      something that is equivalent to the following:
-                          
+
      def show_msg(msg): print msg
      show_msg = add_time_stamp(show_msg)
      '''
     print( msg)
     return 1
 
-     
+
 

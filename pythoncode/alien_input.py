@@ -14,7 +14,7 @@ class LogLevel(Enum):
 """ Return the Input File for this file """
 def get_sourcefilename():
     filename,extension = (inspect.getfile(inspect.currentframe())).split('.')
-    return filename 
+    return filename
 
 def get_logfilename():
     return str(get_sourcefilename()) + str(".log")
@@ -39,7 +39,7 @@ class MyLog:
         else:
             functionlookup[loglevel.upper()](message)
 
-        
+
 def get_parser():
     parser = argparse.ArgumentParser(description='Read the questions for more info')
     parser.add_argument('-f', metavar='ARG1', type=str, nargs='*',help='input file containing translation key and alien input')
@@ -74,7 +74,7 @@ def main():
 
     with open(get_sourcefilename()+"_keys.txt", 'r') as f:
         first_line = f.read().rstrip()
-        translation_dict = create_translation_dict(first_line) 
+        translation_dict = create_translation_dict(first_line)
         print(translation_dict)
         word = ""
         for i,item in enumerate(rest_of_the_input):
@@ -89,5 +89,5 @@ def main():
     print()
 if __name__ =="__main__":
     main()
-	
+
 

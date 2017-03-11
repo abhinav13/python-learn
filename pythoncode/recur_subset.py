@@ -8,8 +8,9 @@ def AllSubsets(array, currentindex) :
         return array
     else:
         ret_array = []
-        print ("currentindex = ", currentindex,array)
+        #print ("currentindex = ", currentindex,array)
         current_element = array[0]
+        currentindex = 0
         while currentindex < len(array):
             temp_array = []
             print("now calling Allsubsets with array ", array[currentindex+1:])

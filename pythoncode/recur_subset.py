@@ -10,7 +10,7 @@ def AllSubsets(array, currentindex) :
         ret_array = []
         print ("currentindex = ", currentindex,array)
         current_element = array[0]
-        while currentindex < len(array)+1:
+        while currentindex < len(array):
             temp_array = []
             print("now calling Allsubsets with array ", array[currentindex+1:])
             temp_array = (AllSubsets(array[currentindex+1:],currentindex))
@@ -33,12 +33,12 @@ def AllSubsets(array, currentindex) :
             currentindex += 1
             if currentindex  < len(array):
                 current_element = array[currentindex]
-            print("current element after incrementing = ", current_element)
+                print("current element after incrementing = ", current_element)
         print("ret_array just before returning", ret_array, currentindex,len(array))
         return ret_array
 
 
-l = [1,2,3]
+l = [1,2,3,4]
 j = []
 print(AllSubsets(l,0))
 

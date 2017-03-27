@@ -1,3 +1,0 @@
-Easy Given a list of two integers or set of two integers, print all two number subsets from this list of integers
-
-Hard- Print all subsets from a given set of two integers.

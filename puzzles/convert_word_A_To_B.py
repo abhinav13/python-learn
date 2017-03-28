@@ -28,10 +28,36 @@ def create_hash_map(d):
             mydict[''.join(l)].append(word)  #This creteas a hashmap of of e.g. l[0at] = cat
     return mydict
 
+def get_all_possible_hash_words(word):
+    ret_val = []
+    for i,c in enumerate(word):
+        l = list(word)
+        l[i] = str(i)
+        ret_val.append("".join(l))
+          #This creteas a hashmap of of e.g. l[0at] = cat
+    return ret_val
+
+
 
 words = {
                 "cat", "rat", "hat", "sag", "bag", "bug", "dog", "hog", "hot", "dot",
                 "rot", "lot", "log", "cry", "pry", "fry", "fat", "fog", "pot", "fat"
         }
+print(words)
+all_words_hash_map = create_hash_map(words)
+end_word = "dog"
+current_list = []
+temp_list = []
+for el in words:
+    wordmap = get_all_possible_hash_words(el)
+    for el in worldmap:
+        #look this word in global hash map dictionary
+        #if the global hash map has no other words that this word can be translated to by substituting
+        # single char, then we have reached a dead end, if not then we need to traverse the list we just got
+        if len(all_words_hash_map[el]) == 1 and all_words_hash_map[el] != end_word:
+            temp_list = []
+        if end_word in all_words_hash_map[el]:  
+            current_list.append(el)
+            current_list.append(end_word)
+            print("Found path ", current_list)
 
-print(create_hash_map(words))

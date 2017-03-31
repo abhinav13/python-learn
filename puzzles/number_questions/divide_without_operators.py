@@ -7,7 +7,7 @@ class Solution(object):
 
     def divide_till_remainder_more_than_divisor(self, dividend, divisor):
         count = 1
-        if dividend - divisor > divisor:
+        if dividend - divisor >= divisor:
             while divisor < dividend:
                 divisor = divisor << 1
                 count = count << 1
@@ -87,9 +87,9 @@ class Solution(object):
 
 
 c = Solution()
-print("Answer", c.divide(333, 2))
-#print("Answer", c.divide(11, 3))
-#print("Answer", c.divide(15, 3))
+#print("Answer", c.divide(100000000, 10))
+#print("Answer", c.divide(1300000, 2))
+print("Answer", c.divide(130299999, 1001))
 #print(c.divide(3333333333333333, 1))
 #print(c.divide(3333333333333333, 2))
 #print(c.divide_slow(3333333333333333, 3))

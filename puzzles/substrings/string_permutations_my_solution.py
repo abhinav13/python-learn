@@ -19,5 +19,5 @@ def _recurselistoflists(array, index):
             # now swap back
             array = swap(array, j, i)
 
-a = 'ABCD'
-_recurselistoflists(a, 0)
+# a = 'ABCDEFGHIJ'
+# _recurselistoflists(a, 0)

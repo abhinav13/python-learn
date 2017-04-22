@@ -113,18 +113,22 @@ def depth_first_search(global_hash, current_path, visited_nodes, start_word, end
     print("reurning at the end of the function with start word %s" %start_word)
 
 
-test_words = [ 'cay', 'bay', 'bai' ]
+def print_dictionary(d):
+    for k in d.keys():
+        print(k," -> " , d[k])
+
+test_words = [ 'dat', 'cat', 'hat', 'hot', 'hog', 'dog' ]
 
 words = {
                 "cat", "rat", "hat", "sag", "bag", "bug", "dog", "hog", "hot", "dot",
                 "rot", "lot", "log", "cry", "pry", "fry", "fat", "fog", "pot", "fat"
         }
-#print(test_words)
+print(test_words)
 #print(words)
 print("\n")
-all_words_hash_map = create_hash_map(words)
-#all_words_hash_map = create_hash_map(test_words)
-print(all_words_hash_map)
+#all_words_hash_map = create_hash_map(words)
+all_words_hash_map = create_hash_map(test_words)
+print_dictionary(all_words_hash_map)
 #end_word = "cay"
 end_word = "dog"
 currlist = []

@@ -19,17 +19,26 @@ class Solution(object):
         :type divisor: int
         :rtype: int
         """
+        Negative = False
+
         if divisor == 0:
             return 0
         if divisor == 1:
             return dividend
+        if (dividend < 0 and divisor > 0) or (dividend > 0 and divisor < 0):
+            Negative = True
+        if divisor < 0:
+            divisor = -divisor
+        if dividend < 0:
+            dividend = -dividend
+
+        if divisor > dividend:
+            return 0
+        #if dividend >=2147483648:
+        #    return 2147483647
         count = 1
         orig_divisor = divisor
         orig_divisor2 = divisor
-        Negative = False
-        if dividend < 0:
-            dividend =  -dividend
-            Negative = True
 
         while divisor < dividend:
             divisor = divisor << 1
@@ -59,7 +68,10 @@ class Solution(object):
                 divisor = orig_divisor2
                 count = count + remain_count
                 print("count after adding remain_count", count)
-        return count
+        if Negative:
+            return -count
+        else:
+            return count
 
     def divide_slow(self, dividend, divisor):
             """
@@ -89,7 +101,8 @@ class Solution(object):
 c = Solution()
 #print("Answer", c.divide(100000000, 10))
 #print("Answer", c.divide(1300000, 2))
-print("Answer", c.divide(130299999, 1001))
+print("Answer", c.divide(-2147483648, 2))
+#print("Answer", c.divide(130299999, 1001))
 #print(c.divide(3333333333333333, 1))
 #print(c.divide(3333333333333333, 2))
 #print(c.divide_slow(3333333333333333, 3))

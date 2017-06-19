@@ -1,51 +1,53 @@
 
 def stingy(number):
-    if number == 1:
-        return [1]
-    if number == 0 or number < 0:
-        return []
-    tot = 0
-    num_persons = []
+    num_persons = 2 
     a = 1
     b = 1
     c = 0
-    tot = a + b
-    num_persons.append(a)
-    num_persons.append(b)
-    while tot < number:
+    temp = []
+    temp.append(a)
+    temp.append(b)
+    lamb_remaining = number - (a+b)
+    while c <= lamb_remaining:
+        print "Before addding c={}".format(c)
         c = a + b
-        tot = tot + c
-        if tot < number:
-            num_persons.append(c)
+        print "After addding c={}".format(c)  
+        if lamb_remaining >= c:
+            temp.append(c)
+            lamb_remaining = lamb_remaining - c 
+            print "lamb_remaining = {}".format(lamb_remaining)
+            num_persons = num_persons + 1
         a = b
         b = c
-    return num_persons
+    return num_persons, temp
 
 
 def generous(number):
-    if number == 1:
-        return [1]
-    if number == 0 or number < 0:
-        return []
-    tot = 0
-    num_persons = []
+    num_persons = 2
     a = 1
-    num_persons.append(a)
-    while tot < number:
-        b = a*2
-        tot = tot + b
-        if tot < number:
-            num_persons.append(b)
+    b = a * 2
+    temp = []
+    temp.append(a)
+    temp.append(b)
+    lamb_remaining = number - (a + b)
+    print "lamb_remaining before starting loop = {}".format(lamb_remaining)
+    while b <= lamb_remaining:
         a = b
-    return num_persons
+        b = a * 2
+        print "after incrementing b = {}".format(b)
+        print "lamb_remaining = {}".format(lamb_remaining)
+        if b <= lamb_remaining:
+            num_persons = num_persons + 1 
+            temp.append(b)
+            lamb_remaining = lamb_remaining - b
+    return num_persons, temp
 
 
-i =  10
+i =  143  
 print("Calling stingy with {}".format(i))
-payout = stingy(i)
-print("sum of payouts {}".format(sum(payout)))
-print("Possible stingy payout {}".format(payout))
+payout1, temp = stingy(i)
+print("Possible stingy payout {} {}".format(payout1, temp))
 print("Calling generous with {}".format(i))
-payout = generous(i)
-print("sum of payouts {}".format(sum(payout)))
-print("Possible generous payout {}".format(payout))
+payout2, temp = generous(i)
+print("Possible generous payout {} {}".format(payout2,temp))
+print("difference = {}".format(payout1-payout2))

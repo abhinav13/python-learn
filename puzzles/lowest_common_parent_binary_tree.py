@@ -34,7 +34,7 @@ def printTree(node):
     print("Node=", node)
     node.visited = True
 
-
+# Test Data
 root = Node(3)
 lnode = Node(2)
 rnode = Node(4)
@@ -48,6 +48,7 @@ root.addleftChild(lnode)
 root.addrightChild(rnode)
 printTree(root)
 
+# Real program
 
 def doit(curnode, lnum, rnum, lf, rf):
     if curnode is None:
@@ -68,10 +69,10 @@ def doit(curnode, lnum, rnum, lf, rf):
         print("Found the lowest parent {}".format(curnode.cargo))
         sys.exit(0)
 
-    if lf == 1: 
+    if lf == 1:
         print("found only lf at node {}".format(curnode.cargo))
         return Node, lf
-    if rf == 1: 
+    if rf == 1:
         print("found only rf at node {}".format(curnode.cargo))
         return Node, rf
     print("Nothing found returning at the bottom")

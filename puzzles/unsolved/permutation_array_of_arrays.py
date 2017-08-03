@@ -1,16 +1,9 @@
-# http://blog.gainlo.co/index.php/2017/01/05/uber-interview-questions-permutations-array-arrays/
-
-
-# Uber Interview Questions – Permutations of an Array of Arrays
-
+# http://blog.gainlo.co/index.php/2017/01/05/uber-interview-questions-permutations-array-arrays
 # Following our previous posts about Uber interview questions, this week we’re going to talk about one of my favorite questions –
 # permutations of an array of arrays.
 #
 # If you keep following our blog, I hope you can solve this problem by yourself as a lot of ideas and techniques used here are
 # common. Here we go.
-#
-#
-#
 #
 #  Permutations of an Array of Arrays
 #  Given a list of array, return a list of arrays, each array is a combination of one element in each given array.

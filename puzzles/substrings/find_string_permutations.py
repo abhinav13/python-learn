@@ -21,7 +21,7 @@ def findAll(a,start):
 
 	#print "start at the begining ", start
 	if(start == len(a)-1):
-		print "Returning aftger printing " ,a
+		print( "Returning aftger printing {}".format(a))
 		return
 
 	j =start

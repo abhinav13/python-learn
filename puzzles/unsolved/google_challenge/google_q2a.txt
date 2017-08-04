@@ -1,0 +1,23 @@
+def getsum(x, y):
+	start_point = 1
+	j = 1
+	i = 2
+	prev_val = start_point
+     	next_val = start_point
+     	
+     	while i <= x:
+        	next_val = prev_val + i-1 + 1
+        	prev_val = next_val
+		i = i +1
+	if i == x and j == y:
+     		return next_val
+	j =2
+	prev_val = next_val
+	#print "After horizontal_move {}".format(prev_val)
+	while j <= y:
+		next_val = prev_val + (j-1) + (x-1)
+		prev_val = next_val
+		j = j+1
+	return next_val	
+		
+

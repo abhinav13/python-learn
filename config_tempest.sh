@@ -5,7 +5,7 @@ mkdir ~/tempest
 cd ~/tempest
 /usr/share/openstack-tempest-*/tools/configure-tempest-directory
 
-FILE_NAME='~/r14rc'
+FILE_NAME='/home/osp_admin/r14rc'
 os_password=''
 while read line;
 do

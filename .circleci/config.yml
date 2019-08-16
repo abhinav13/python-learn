@@ -9,6 +9,7 @@ jobs:
                 - run:
                         command: |  # use pipenv to install dependencies
                                 #sudo pip install pipenv
+                                #ahinav added this
                                 python3 compile.py
                 - store_artifacts:
                         path: ~/circleci-demo-python-django/__pycache

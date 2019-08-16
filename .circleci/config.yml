@@ -8,7 +8,7 @@ jobs:
                 - checkout  # checkout source code to working directory
                 - run:
                         command: |  # use pipenv to install dependencies
-                                sudo pip install pipenv
+                                #sudo pip install pipenv
                                 python3 compile.py
                 - store_artifacts:
                         path: ~/circleci-demo-python-django/__pycache

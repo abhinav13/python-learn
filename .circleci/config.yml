@@ -11,5 +11,5 @@ jobs:
                                 sudo pip install pipenv
                                 python3 compile.py
                 - store_artifacts:
-                        path: __pycache
+                        path:~/circleci-demo-python-django/__pycache
                         destination: tr1
